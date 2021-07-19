@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { users as usersData } from '../../../data/users';
 import UsersListItem from '../../molecules/UsersListItem/UsersListItem';
 import { Wrapper } from './UsersList.elements';
 
-const UsersList = (props) => {
-  const [user, setUser] = useState(usersData);
+const mockAPI = (success) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (usersData) {
+        resolve([...usersData]);
+      } else {
+        reject({ message: 'Error' });
+      }
+    }, 2000);
+  });
+};
 
+const UsersList = (props) => {
+  const [users, setUsers] = useState([]);
+  const [isLoading, setLoadingState] = useState([]);
+  useEffect(() => {
+    setLoadingState(true);
+    mockAPI()
+        .then((data) => {
+          setLoadingState(false);
+          setUsers(data);
+        })
+        .catch((err) => console.log(err));
+  }, []);
   const deleteUser = (name) => {
-    console.log(user);
-    const filteredUsers = user.filter((item) => name !== item.name);
-    setUser(filteredUsers);
-    console.log(filteredUsers);
+    const filteredUsers = users.filter((user) => user.name !== name);
+    setUsers(filteredUsers);
   };
 
   return (
     <Wrapper>
+      <h1>{isLoading ? 'Loading...' : 'Users List'}</h1>
       <ul>
-        {usersData.map((item) => (
+        {users.map((item) => (
           <UsersListItem
             key={item.name}
             usersData={item}
