@@ -4,7 +4,10 @@ import { Wrapper, Name, Attendance, Person } from './UsersListItem.elements';
 import Button from 'components/atoms/Button/Button';
 import Grade from '../../atoms/Grade/Grade';
 
-const UsersListItem = ({ usersData: { average, name, attendance = '0%' } }) => {
+const UsersListItem = ({
+  deleteUser,
+  usersData: { average, name, attendance = '0%' },
+}) => {
   return (
     <Wrapper>
       <div>
@@ -15,7 +18,7 @@ const UsersListItem = ({ usersData: { average, name, attendance = '0%' } }) => {
         <Attendance>attendance: {attendance}</Attendance>
       </Person>
       <div>
-        <Button />
+        <Button onClick={() => deleteUser(name)} />
       </div>
     </Wrapper>
   );
