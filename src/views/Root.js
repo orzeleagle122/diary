@@ -58,7 +58,7 @@ const Root = () => {
                   handleInputChange={handleInputChange}
                 />
               </Route>
-              <Route path="/">
+              <Route path="/" exact>
                 <Dashboard deleteUser={deleteUser} users={users} />
               </Route>
             </Switch>
