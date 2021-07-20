@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
@@ -44,25 +44,39 @@ const Root = () => {
     setFormValues(initialFormState);
   };
 
+  export const UserContext = createContext({
+    users: [],
+    handleAddUser: () => {},
+    deleteUser: () => {},
+  });
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <MainTemplate>
-          <Wrapper>
-            <Switch>
-              <Route path="/add-user">
-                <AddUser
-                  formValues={formValues}
-                  handleAddUser={handleAddUser}
-                  handleInputChange={handleInputChange}
-                />
-              </Route>
-              <Route path="/" exact>
-                <Dashboard deleteUser={deleteUser} users={users} />
-              </Route>
-            </Switch>
-          </Wrapper>
+          <UserContext.Provider
+            value={{
+              users,
+              handleAddUser,
+              deleteUser,
+            }}
+          >
+            <Wrapper>
+              <Switch>
+                <Route path="/add-user">
+                  <AddUser
+                    formValues={formValues}
+                    handleAddUser={handleAddUser}
+                    handleInputChange={handleInputChange}
+                  />
+                </Route>
+                <Route path="/" exact>
+                  <Dashboard deleteUser={deleteUser} users={users} />
+                </Route>
+              </Switch>
+            </Wrapper>
+          </UserContext.Provider>
         </MainTemplate>
       </ThemeProvider>
     </Router>
@@ -70,3 +84,5 @@ const Root = () => {
 };
 
 export default Root;
+
+export class UserContext {}
