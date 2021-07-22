@@ -41,3 +41,14 @@ export const TitleWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.m};
   }
 `;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+
+  img {
+    max-width: 150px;
+    max-height: 400px;
+    object-fit: cover;
+    margin-left: 35px;
+  }
+`;
