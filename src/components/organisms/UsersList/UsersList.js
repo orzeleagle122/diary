@@ -2,10 +2,8 @@ import React, { useContext } from 'react';
 import UsersListItem from 'components/molecules/UsersListItem/UsersListItem';
 import { StyledList } from './UsersList.styles';
 import { Title } from 'components/atoms/Title/Title';
-import { UserContext } from 'providers/UsersProvider';
 
-const UsersList = () => {
-  const { users } = useContext(UserContext);
+const UsersList = ({ users }) => {
   return (
     <>
       <Title>Students list</Title>

@@ -14,13 +14,7 @@ const NewsSection = (props) => {
   const [error, setError] = useState('');
 
   const REACT_APP_DATOCMS_TOKEN = 'fdf0478b1aa7ceb9fc0572726967e1';
-
-  useEffect(() => {
-    axios
-      .post(
-        'https://graphql.datocms.com/',
-        {
-          query: `{
+  const query = `{
                   allArticles {
                     id
                     title
@@ -30,7 +24,14 @@ const NewsSection = (props) => {
                       url
                     }
                   }
-                }`,
+                }`;
+
+  useEffect(() => {
+    axios
+      .post(
+        'https://graphql.datocms.com/',
+        {
+          query,
         },
         {
           headers: {
@@ -50,7 +51,7 @@ const NewsSection = (props) => {
       .catch(() => {
         setError('Sorry, we couldnt load articles for you');
       });
-  }, []);
+  }, [query]);
 
   return (
     <Wrapper>
