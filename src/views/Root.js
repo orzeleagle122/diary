@@ -27,7 +27,7 @@ const Root = () => {
               <Route path="/add-user">
                 <AddUser />
               </Route>
-              <Route path="/group/:id" exact>
+              <Route path="/group/:id?">
                 <Dashboard />
               </Route>
             </Switch>

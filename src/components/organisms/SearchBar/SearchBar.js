@@ -1,8 +1,11 @@
+import { Input } from 'components/atoms/Input/Input';
 import React from 'react';
-import { Input } from '../../atoms/Input/Input';
-import { SearchBarWrapper, StatusInfo } from './SearchBar.elements';
+import {
+  SearchBarWrapper,
+  StatusInfo,
+} from 'components/organisms/SearchBar/SearchBar.styles';
 
-const SearchBar = () => (
+export const SearchBar = () => (
   <SearchBarWrapper>
     <StatusInfo>
       <p>Logged as:</p>
@@ -13,5 +16,3 @@ const SearchBar = () => (
     <Input />
   </SearchBarWrapper>
 );
-
-export default SearchBar;

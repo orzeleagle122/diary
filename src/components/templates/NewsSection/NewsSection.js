@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Wrapper,
   ArticleWrapper,
+  ContentWrapper,
   NewsSectionHeader,
   TitleWrapper,
-  ContentWrapper,
-} from './NewsSection.elements';
+  Wrapper,
+} from 'components/templates/NewsSection/NewsSection.styles';
+import { Button } from 'components/atoms/Button/Button';
 import axios from 'axios';
-import { Button } from '../../atoms/Button/Button';
 
-const NewsSection = (props) => {
-  const [artcles, setArticles] = useState([]);
+export const query = `
+         {
+          allArticles {
+            id
+            title
+            category
+            content
+            image {
+              url
+            }
+          }
+        }
+      `;
+
+const NewsSection = () => {
+  const [articles, setArticles] = useState([]);
   const [error, setError] = useState('');
-
-  const REACT_APP_DATOCMS_TOKEN = 'fdf0478b1aa7ceb9fc0572726967e1';
-  const query = `{
-                  allArticles {
-                    id
-                    title
-                    category
-                    content
-                    image{
-                      url
-                    }
-                  }
-                }`;
 
   useEffect(() => {
     axios
@@ -35,29 +36,23 @@ const NewsSection = (props) => {
         },
         {
           headers: {
-            authorization: `Bearer ${REACT_APP_DATOCMS_TOKEN}`,
+            authorization: `Bearer ${process.env.REACT_APP_DATOCMS_TOKEN}`,
           },
         }
       )
-      .then(
-        ({
-          data: {
-            data: { allArticles },
-          },
-        }) => {
-          setArticles(allArticles);
-        }
-      )
+      .then(({ data: { data } }) => {
+        setArticles(data.allArticles);
+      })
       .catch(() => {
-        setError('Sorry, we couldnt load articles for you');
+        setError(`Sorry, we couldn't load articles for you`);
       });
-  }, [query]);
+  }, []);
 
   return (
     <Wrapper>
-      <NewsSectionHeader>News feed sections</NewsSectionHeader>
-      {artcles.length > 0 ? (
-        artcles.map(({ id, title, content, image: { url }, category }) => (
+      <NewsSectionHeader>University news feed</NewsSectionHeader>
+      {articles.length > 0 ? (
+        articles.map(({ id, title, category, content, image = null }) => (
           <ArticleWrapper key={id}>
             <TitleWrapper>
               <h3>{title}</h3>
@@ -65,9 +60,9 @@ const NewsSection = (props) => {
             </TitleWrapper>
             <ContentWrapper>
               <p>{content}</p>
-              <img src={url} alt={title} />
+              {image ? <img src={image.url} alt="article" /> : null}
             </ContentWrapper>
-            <Button isBig>Read more...</Button>
+            <Button isBig>Read more</Button>
           </ArticleWrapper>
         ))
       ) : (

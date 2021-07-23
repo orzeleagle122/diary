@@ -18,15 +18,7 @@ const Navigation = () => {
       <StyledLink exact to="/group">
         Dashboard
       </StyledLink>
-      <StyledLink exact to="/add-user">
-        Add user
-      </StyledLink>
-      <StyledLink exact to="/">
-        Settings
-      </StyledLink>
-      <StyledLink exact to="/">
-        Logout
-      </StyledLink>
+      <StyledLink to="/add-user">Add user</StyledLink>
     </Wrapper>
   );
 };

@@ -1,10 +1,10 @@
 import React from 'react';
-import AddUser from 'views/AddUser';
+import AddUser from './AddUser';
 import Dashboard from './Dashboard';
-import { renderWithProviders } from 'helpers/renderWithProviders';
 import { screen, fireEvent } from '@testing-library/react';
+import { renderWithProviders } from 'helpers/renderWithThemeProvider';
 
-describe('Add User', () => {
+describe('Form Field', () => {
   it('Adds new user to the list', () => {
     renderWithProviders(
       <>
@@ -13,7 +13,7 @@ describe('Add User', () => {
       </>
     );
     fireEvent.change(screen.getByTestId('Name'), {
-      target: { value: 'Grzesiek' },
+      target: { value: 'Grażyna' },
     });
     fireEvent.change(screen.getByTestId('Attendance'), {
       target: { value: '55%' },
@@ -23,7 +23,7 @@ describe('Add User', () => {
     });
     fireEvent.click(screen.getByTestId('Consent'));
     fireEvent.click(screen.getByText('Add'));
-    screen.getByText('Grzesiek');
+    screen.getByText('Grażyna');
   });
 
   it('Prevents adding new user if the consent is not checked', () => {
@@ -34,7 +34,7 @@ describe('Add User', () => {
       </>
     );
     fireEvent.change(screen.getByTestId('Name'), {
-      target: { value: 'Grzesiek' },
+      target: { value: 'Grażyna' },
     });
     fireEvent.change(screen.getByTestId('Attendance'), {
       target: { value: '55%' },
@@ -43,7 +43,7 @@ describe('Add User', () => {
       target: { value: '4.5' },
     });
     fireEvent.click(screen.getByText('Add'));
-    const newUser = screen.queryByText('Grzesiek');
+    const newUser = screen.queryByText('Grażyna');
     expect(newUser).not.toBeInTheDocument();
   });
 });

@@ -1,7 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const UserContext = createContext({
+export const UsersContext = React.createContext({
   users: [],
   handleAddUser: () => {},
   deleteUser: () => {},
@@ -22,17 +22,16 @@ const UsersProvider = ({ children }) => {
     setUsers(filteredUsers);
   };
 
-  const handleAddUser = (value) => {
+  const handleAddUser = (values) => {
     const newUser = {
-      name: value.name,
-      attendance: value.attendance,
-      average: value.average,
+      name: values.name,
+      attendance: values.attendance,
+      average: values.average,
     };
-
     setUsers([newUser, ...users]);
   };
   return (
-    <UserContext.Provider
+    <UsersContext.Provider
       value={{
         users,
         handleAddUser,
@@ -40,7 +39,7 @@ const UsersProvider = ({ children }) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </UsersContext.Provider>
   );
 };
 

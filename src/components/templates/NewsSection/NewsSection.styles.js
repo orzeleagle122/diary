@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 
 export const Wrapper = styled.div`
-  grid-row: 1/3;
-  grid-column: 3/3;
+  grid-row: 1 / 3;
+  grid-column: 3 / 3;
   border-left: 1px solid ${({ theme }) => theme.colors.darkPurple};
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   overflow-y: scroll;
 `;
 
-export const NewsSectionHeader = styled.h3`
+export const NewsSectionHeader = styled.h2`
   margin-right: auto;
   color: ${({ theme }) => theme.colors.darkGrey};
 `;
@@ -38,7 +38,7 @@ export const TitleWrapper = styled.div`
 
   p {
     margin: 0;
-    font-size: ${({ theme }) => theme.fontSize.m};
+    font-size: ${({ theme }) => theme.fontSize.l};
   }
 `;
 
@@ -46,9 +46,8 @@ export const ContentWrapper = styled.div`
   display: flex;
 
   img {
-    max-width: 150px;
-    max-height: 400px;
-    object-fit: cover;
     margin-left: 35px;
+    max-width: 200px;
+    object-fit: cover;
   }
 `;
