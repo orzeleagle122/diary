@@ -8,11 +8,7 @@ export const handlers = [
   }),
   rest.post('/students/search', (req, res, ctx) => {
     const matchingStudents = req.body.searchPhrase
-      ? students.filter((student) =>
-          student.name
-            .toLowerCase()
-            .includes(req.body.searchPhrase.toLowerCase())
-        )
+      ? students.filter((student) => student.name.toLowerCase().includes(req.body.searchPhrase.toLowerCase()))
       : [];
     return res(
       ctx.status(200),
@@ -23,9 +19,7 @@ export const handlers = [
   }),
   rest.get('/students/:group', (req, res, ctx) => {
     if (req.params.group) {
-      const matchingStudents = students.filter(
-        (student) => student.group === req.params.group
-      );
+      const matchingStudents = students.filter((student) => student.group === req.params.group);
       return res(
         ctx.status(200),
         ctx.json({
