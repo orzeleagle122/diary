@@ -52,7 +52,8 @@ export const SearchResults = styled.ul`
 export const SearchResultsItem = styled.li`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.darkGrey};
-  background-color: ${({ theme, isHighlighted }) => (isHighlighted ? theme.colors.lightPurple : theme.colors.white)};
+  background-color: ${({ theme, isHighlighted }) =>
+    isHighlighted ? theme.colors.lightPurple : theme.colors.white};
   width: 100%;
   padding: 20px 5px;
 
