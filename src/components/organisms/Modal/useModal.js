@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
+import { useState } from 'react';
 
-const useModal = (initialstate = false) => {
-  const [isOpen, setOpenState] = useState(initialstate);
-  const handleCloseModal = () => setOpenState(false);
-  const handleOpenModal = () => setOpenState(true);
+const useModal = (initialState = false) => {
+  const [isOpen, setModalState] = useState(initialState);
+
+  const handleOpenModal = () => setModalState(true);
+  const handleCloseModal = () => setModalState(false);
 
   return {
-    Modal,
     isOpen,
-    handleCloseModal,
     handleOpenModal,
+    handleCloseModal,
   };
 };
 

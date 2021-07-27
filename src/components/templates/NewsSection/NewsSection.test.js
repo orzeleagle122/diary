@@ -2,9 +2,7 @@ import React from 'react';
 import { render, screen } from 'test-utils';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
-import NewsSection, {
-  query,
-} from 'components/templates/NewsSection/NewsSection';
+import NewsSection, { query } from 'components/templates/NewsSection/NewsSection';
 
 const mock = new MockAdapter(axios);
 
@@ -22,9 +20,7 @@ describe('News Section', () => {
   it('Displays the articles', async () => {
     mock.onPost('https://graphql.datocms.com/', { query }).reply(200, {
       data: {
-        allArticles: [
-          { id: 1, title: 'Test', category: 'Test', content: 'Test' },
-        ],
+        allArticles: [{ id: 1, title: 'Test', category: 'Test', content: 'Test' }],
       },
     });
     render(<NewsSection />);
