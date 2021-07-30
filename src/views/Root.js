@@ -16,6 +16,8 @@ import { Button } from '../components/atoms/Button/Button';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
+import ErrorMessge from '../components/molecules/ErrorMessge/ErrorMessge';
+import { useError } from '../hooks/useError';
 
 const Authenticated = () => {
   return (
@@ -73,7 +75,13 @@ const Unauthenticated = () => {
 
 const Root = () => {
   const auth = useAuth();
-  return auth.user ? <Authenticated /> : <Unauthenticated />;
+  const { error } = useError();
+  return (
+    <>
+      {error ? <ErrorMessge message={error} /> : null}
+      {auth.user ? <Authenticated /> : <Unauthenticated />}
+    </>
+  );
 };
 
 export default Root;
